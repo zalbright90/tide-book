@@ -1,5 +1,6 @@
 /* CSS Reset */
 /* Universal box-sizing and margin reset */
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -229,6 +230,10 @@ main {
   max-width: 500px;
   margin: auto;
 }
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
 
 input, button {
   display: block;
