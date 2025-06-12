@@ -1,0 +1,245 @@
+/* CSS Reset */
+/* Universal box-sizing and margin reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+/* Root configuration for smooth animations and typography */
+:root {
+  line-height: 1.5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; /* IE/Edge */
+}
+
+[hidden] {
+  display: none !important;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+/* Body setup for mobile-first design */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Typography - readability with fallback support */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  overflow-wrap: break-word;
+  word-wrap: break-word; /* IE/Edge fallback */
+  line-height: 1.2;
+}
+
+p {
+  overflow-wrap: break-word;
+  word-wrap: break-word; /* IE/Edge fallback */
+  max-width: 65ch; /* Optimal reading width */
+}
+
+/* Lists - clean slate approach */
+ol, ul {
+  margin: 0;
+  padding-left: 0; /* Cross-browser compatibility */
+  padding-inline-start: 0; /* Modern browsers */
+}
+
+ol[role="list"], 
+ul[role="list"] {
+  list-style: none;
+}
+
+/* Media elements - responsive and accessible */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure videos don't overflow on mobile */
+video {
+  width: 100%;
+  height: auto;
+}
+
+/* Form elements - inherit typography for consistency */
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  padding: 0;
+  outline: none; /* Will be overridden by focus styles */
+}
+
+/* Button reset for mobile touch targets */
+button {
+  cursor: pointer;
+  min-height: 44px; /* iOS minimum touch target */
+  min-width: 44px;
+  -webkit-appearance: none; /* iOS Safari */
+  -moz-appearance: none; /* Firefox */
+  appearance: none;
+}
+
+/* Textarea specific improvements */
+textarea {
+  resize: vertical;
+  overflow: auto; /* IE fix */
+}
+
+/* Table reset for data display */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+/* Figure and media containers */
+figure {
+  margin: 0;
+}
+
+/* App container isolation */
+#root, #__next, #app {
+  isolation: isolate;
+  min-height: 100vh;
+}
+
+/* Focus management for accessibility - with fallbacks */
+button:focus,
+input:focus,
+textarea:focus, 
+select:focus,
+a:focus,
+[tabindex]:focus {
+  outline: 2px solid #005fcc; /* Fallback color */
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Modern focus-visible support with fallback */
+@supports selector(:focus-visible) {
+  button:focus:not(:focus-visible),
+  input:focus:not(:focus-visible),
+  textarea:focus:not(:focus-visible),
+  select:focus:not(:focus-visible),
+  a:focus:not(:focus-visible),
+  [tabindex]:focus:not(:focus-visible) {
+    outline: none;
+  }
+  
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+/* Smooth scrolling with reduced motion respect */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  /* Prevent zoom on input focus */
+  input, textarea, select {
+    font-size: 16px;
+  }
+  
+  /* Better touch targets */
+  button, 
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* IE11 specific fixes */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* IE11 flexbox fixes */
+  img {
+    width: auto\9; /* IE8-9 */
+    max-width: 100%;
+  }
+  
+  /* IE11 min-height fix */
+  html, body {
+    height: 100%;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :focus-visible {
+    outline: 3px solid;
+    outline-offset: 2px;
+  }
+}
+
+/* Dark mode preparations */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+body {
+  font-family: sans-serif;
+  padding: 2rem;
+  background: #e3f2fd;
+}
+
+main {
+  max-width: 500px;
+  margin: auto;
+}
+
+input, button {
+  display: block;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+pre {
+  background: white;
+  padding: 1rem;
+  margin-top: 2rem;
+  white-space: pre-wrap;
+}
