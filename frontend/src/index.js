@@ -6,7 +6,11 @@ const output = document.querySelector('#output');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const location = document.querySelector('#locationInput').value;
-    const date = document.querySelector('#dateInput');
+    const date = document.querySelector('#dateInput').value;
+    if (!date) {
+        output.textContent = 'Please select a date.';
+        return;
+    }
 
     try {
         const geoRes = await fetch(`http://localhost:3000/api/geocode?location=${encodeURIComponent(location)}`);

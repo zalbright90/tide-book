@@ -12,9 +12,16 @@ module.exports = {
     devtool: 'source-map',
     devServer: {
         static: './dist',
-        port: 3000,
+        port: 8080,
+        proxy: [
+            {
+                context: ['/api'],
+                target: 'http://localhost:3000',
+                changeOrigin: true,
+            },
+        ],
         open: true,
-        hot: true
+        hot: true,
     },
     module: {
         rules: [
