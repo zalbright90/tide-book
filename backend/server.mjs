@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import fetch from 'node-fetch';
 
+import { getCache, setCache } from './cache.js';
+
 dotenv.config();
 
 const app = express();
@@ -10,7 +12,6 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
-const cache = {};
 
 app.get('/api/geocode', async (req, res) => {
     const { location } = req.query;
@@ -29,10 +30,11 @@ app.get('/api/tides', async (req, res) => {
     const key = `${lat}_${lon}_${date}`;
     console.log(`Received tide request: ${key}`);
 
-    if (cache[key] && (Date.now() - cache[key].timestamp < 24 * 60 * 60 * 1000)) {
-        console.log('Serving from cache');
-        return res.json(cache[key].data);
-    }
+    const cached = getCache(key);
+        if (cached) {
+            console.log('Serving tide data from cache');
+            return res.json(cached);
+        }
 
     try {
         const url = `https://www.worldtides.info/api/v3?extremes&date=${date}&lat=${lat}&lon=${lon}&key=${process.env.WORLDTIDES_API_KEY}`;
@@ -41,7 +43,7 @@ app.get('/api/tides', async (req, res) => {
         const data = await response.json();
         console.log(`WorldTides response received for ${key}`);
 
-        cache[key] = { data, timestamp: Date.now() };
+        setCache(key,data);
         res.json(data);
     } catch (error) {
         console.error('Error fetching tide data:', error);
