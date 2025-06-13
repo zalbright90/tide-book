@@ -35,7 +35,7 @@ app.get('/api/tides', async (req, res) => {
     }
 
     try {
-        const url = `https://www.worldtides.info/api/v3?heights&extremes&date=${date}&lat=${lat}&lon=${lon}&key=${process.env.WORLDTIDES_API_KEY}`;
+        const url = `https://www.worldtides.info/api/v3?extremes&date=${date}&lat=${lat}&lon=${lon}&key=${process.env.WORLDTIDES_API_KEY}`;
         console.log(`Fetching from WorldTides: ${url}`);
         const response = await fetch(url);
         const data = await response.json();
