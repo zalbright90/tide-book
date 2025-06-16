@@ -45,12 +45,20 @@ form.addEventListener('submit', async (e) => {
         const firstTideDate = tideData.extrames?.[0]?.date?.split("T")[0] || "Unspecified Date";
 
         function formatDateLabel(dateString) {
-            const options = { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit'};
-            return new Date(dateString).toLocaleDateString('en-US', options);
+            const parts = dateString.split('-');
+            const year = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const day = parseInt(parts[2], 10);
+            const dateObject = new Date(year, month, day);
+
+            const options = {weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit'};
+            return dateObject.toLocaleDateString('en-US', options);
         }
 
+        const dateLabel = formatDateLabel(date);
+
         const title = document.createElement('h2');
-        title.textContent = `${locationName} Tide Chart for ${formatDateLabel(firstTideDate)}`;
+        title.textContent = `${locationName} Tide Chart for ${dateLabel}`;
         title.style.textAlign = 'center';
         title.style.fontFamily = 'serif';
         title.style.color = '#003366';

@@ -62,5 +62,69 @@
       ]
     },
     "timestamp": 1749800357496
+  },
+  "46.1377048_-122.934462_2025-06-15": {
+    "data": {
+      "status": 200,
+      "callCount": 1,
+      "copyright": "Tidal data retrieved from www.worldtides.info. Copyright (c) 2014-2025 Brainware LLC. Licensed for use of individual spatial coordinates on behalf of/by an end-user. Source data created by the Center for Operational Oceanographic Products and Services (CO-OPS) and is not subject to copyright protection. NO GUARANTEES ARE MADE ABOUT THE CORRECTNESS OF THIS DATA. You may not use it if anyone or anything could come to harm as a result of using it (e.g. for navigational purposes).",
+      "requestLat": 46.1377048,
+      "requestLon": -122.934462,
+      "responseLat": 46.1061,
+      "responseLon": -122.954,
+      "atlas": "NOAA",
+      "station": "Longview, Columbia River, Washington",
+      "extremes": [
+        {
+          "dt": 1749976590,
+          "date": "2025-06-15T08:36+0000",
+          "height": 0.118,
+          "type": "Low"
+        },
+        {
+          "dt": 1749993609,
+          "date": "2025-06-15T13:20+0000",
+          "height": 1.143,
+          "type": "High"
+        },
+        {
+          "dt": 1750024235,
+          "date": "2025-06-15T21:50+0000",
+          "height": -0.261,
+          "type": "Low"
+        },
+        {
+          "dt": 1750042198,
+          "date": "2025-06-16T02:49+0000",
+          "height": 0.742,
+          "type": "High"
+        },
+        {
+          "dt": 1750065775,
+          "date": "2025-06-16T09:22+0000",
+          "height": 0.051,
+          "type": "Low"
+        },
+        {
+          "dt": 1750082972,
+          "date": "2025-06-16T14:09+0000",
+          "height": 1.03,
+          "type": "High"
+        },
+        {
+          "dt": 1750112574,
+          "date": "2025-06-16T22:22+0000",
+          "height": -0.28,
+          "type": "Low"
+        },
+        {
+          "dt": 1750131132,
+          "date": "2025-06-17T03:32+0000",
+          "height": 0.745,
+          "type": "High"
+        }
+      ]
+    },
+    "timestamp": 1750045281766
   }
 }
