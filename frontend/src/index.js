@@ -1,6 +1,8 @@
 import './styles.css';
+import Chart from 'chart.js/auto';
 
 const form = document.querySelector('#searchForm');
+const pre = document.querySelector('pre');
 const output = document.querySelector('#output');
 
 let tideContainer = document.querySelector('#tide-display');
@@ -12,7 +14,8 @@ if (!tideContainer) {
     tideContainer.style.backgroundColor = '#f0f8ff';
     tideContainer.style.borderRadius = '1rem';
     tideContainer.style.marginTop = '2rem';
-    document.body.appendChild(tideContainer);
+    const main = document.querySelector('main');
+    main.appendChild(tideContainer);
 }
 
 form.addEventListener('submit', async (e) => {
@@ -20,7 +23,7 @@ form.addEventListener('submit', async (e) => {
     const location = document.querySelector('#locationInput').value;
     const date = document.querySelector('#dateInput').value;
     if (!date) {
-        output.textContent = 'Please select a date.';
+        alert('Please select a date.');
         return;
     }
 
@@ -29,7 +32,7 @@ form.addEventListener('submit', async (e) => {
         const geoData = await geoRes.json();
 
         if (!geoData.results || geoData.results.length === 0) {
-            output.textContent = 'Location not found.';
+            alert('Location not found.');
             return;
         }
 
@@ -40,9 +43,10 @@ form.addEventListener('submit', async (e) => {
 
         output.textContent = '';
         tideContainer.innerHTML = '';
+        form.style.display = 'none';
+        if (output) pre.style.display = 'none';
 
         const locationName = tideData.station || "Unidentified Location";
-        const firstTideDate = tideData.extrames?.[0]?.date?.split("T")[0] || "Unspecified Date";
 
         function formatDateLabel(dateString) {
             const parts = dateString.split('-');
@@ -64,47 +68,87 @@ form.addEventListener('submit', async (e) => {
         title.style.color = '#003366';
         tideContainer.appendChild(title);
 
-        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("width", "100%");
-        svg.setAttribute("height", "150");
-        svg.setAttribute("viewBox", "0 0 800 150");
-        svg.style.background = "#e6f7ff";
-        svg.style.borderRadius = "10px";
-        svg.style.marginBottom = "1rem";
+        const labels = tideData.extremes.map(e => new Date(e.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+        const heights = tideData.extremes.map(e => e.height);
 
-        const maxHeight = Math.max(...tideData.extremes.map(e => e.height));
-        const minHeight = Math.min(...tideData.extremes.map(e => e.height));
+        const chartListWrapper = document.createElement('div');
+        chartListWrapper.classList.add('chart-list-wrapper');
 
-        const points = tideData.extremes.map((point, i) => {
-            const x = i * (800 / (tideData.extremes.length - 1));
-            const y = 130 - ((point.height - minHeight) / (maxHeight - minHeight)) * 100;
-            return `${x},${y}`;
-        }).join(' ');
+        const chartWrapper = document.createElement('div');
+            chartWrapper.classList.add('chart-wrapper');
 
-        const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
-        polyline.setAttribute("points", points);
-        polyline.setAttribute("fill", "none");
-        polyline.setAttribute("stroke", "#003366");
-        polyline.setAttribute("stroke-width", "2");
+        const canvas = document.createElement('canvas');
+            chartWrapper.appendChild(canvas);
 
-        svg.appendChild(polyline);
-        tideContainer.appendChild(svg);
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Tide Height (m)',
+                    data: heights,
+                    borderColor: '#006699',
+                    backgroundColor: 'rgba(0,102,153,0.1)',
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#006699',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            color: '#003366',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Height (m)',
+                            color: '#003366'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#003366',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            color: '#003366'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `${ctx.raw.toFixed(2)} meters`
+                        }
+                    }
+                }
+            }
+        });
 
         const tideList = document.createElement('ul');
-        tideList.style.listStyle = 'none';
-        tideList.style.padding = 0;
+        tideList.classList.add('tide-list');
 
         tideData.extremes.forEach(extreme => {
             const item = document.createElement('li');
             const time = new Date(extreme.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             item.textContent = `${extreme.type} Tide: ${time} — ${extreme.height}m`;
-            item.style.fontFamily = 'monospace';
             item.style.padding = '0.25rem 0';
             tideList.appendChild(item);
         });
 
-        tideContainer.appendChild(tideList);
+        chartListWrapper.appendChild(chartWrapper);
+        chartListWrapper.appendChild(tideList);
+
+        tideContainer.appendChild(chartListWrapper);
     } catch (err) {
-        output.textContent = `Error fetching data: ${err.message}`;
+        alert(`Error fetching data: ${err.message}`);
     }
 });

@@ -126,5 +126,133 @@
       ]
     },
     "timestamp": 1750045281766
+  },
+  "46.1377048_-122.934462_2025-06-08": {
+    "data": {
+      "status": 200,
+      "callCount": 1,
+      "copyright": "Tidal data retrieved from www.worldtides.info. Copyright (c) 2014-2025 Brainware LLC. Licensed for use of individual spatial coordinates on behalf of/by an end-user. Source data created by the Center for Operational Oceanographic Products and Services (CO-OPS) and is not subject to copyright protection. NO GUARANTEES ARE MADE ABOUT THE CORRECTNESS OF THIS DATA. You may not use it if anyone or anything could come to harm as a result of using it (e.g. for navigational purposes).",
+      "requestLat": 46.1377048,
+      "requestLon": -122.934462,
+      "responseLat": 46.1061,
+      "responseLon": -122.954,
+      "atlas": "NOAA",
+      "station": "Longview, Columbia River, Washington",
+      "extremes": [
+        {
+          "dt": 1749372679,
+          "date": "2025-06-08T08:51+0000",
+          "height": 1.054,
+          "type": "High"
+        },
+        {
+          "dt": 1749403312,
+          "date": "2025-06-08T17:21+0000",
+          "height": -0.207,
+          "type": "Low"
+        },
+        {
+          "dt": 1749420680,
+          "date": "2025-06-08T22:11+0000",
+          "height": 0.651,
+          "type": "High"
+        },
+        {
+          "dt": 1749440280,
+          "date": "2025-06-09T03:38+0000",
+          "height": 0.125,
+          "type": "Low"
+        },
+        {
+          "dt": 1749461061,
+          "date": "2025-06-09T09:24+0000",
+          "height": 1.125,
+          "type": "High"
+        },
+        {
+          "dt": 1749492414,
+          "date": "2025-06-09T18:06+0000",
+          "height": -0.221,
+          "type": "Low"
+        },
+        {
+          "dt": 1749509854,
+          "date": "2025-06-09T22:57+0000",
+          "height": 0.703,
+          "type": "High"
+        },
+        {
+          "dt": 1749529696,
+          "date": "2025-06-10T04:28+0000",
+          "height": 0.2,
+          "type": "Low"
+        }
+      ]
+    },
+    "timestamp": 1750046816398
+  },
+  "46.1377048_-122.934462_2025-06-19": {
+    "data": {
+      "status": 200,
+      "callCount": 1,
+      "copyright": "Tidal data retrieved from www.worldtides.info. Copyright (c) 2014-2025 Brainware LLC. Licensed for use of individual spatial coordinates on behalf of/by an end-user. Source data created by the Center for Operational Oceanographic Products and Services (CO-OPS) and is not subject to copyright protection. NO GUARANTEES ARE MADE ABOUT THE CORRECTNESS OF THIS DATA. You may not use it if anyone or anything could come to harm as a result of using it (e.g. for navigational purposes).",
+      "requestLat": 46.1377048,
+      "requestLon": -122.934462,
+      "responseLat": 46.1061,
+      "responseLon": -122.954,
+      "atlas": "NOAA",
+      "station": "Longview, Columbia River, Washington",
+      "extremes": [
+        {
+          "dt": 1750336033,
+          "date": "2025-06-19T12:27+0000",
+          "height": -0.077,
+          "type": "Low"
+        },
+        {
+          "dt": 1750353686,
+          "date": "2025-06-19T17:21+0000",
+          "height": 0.608,
+          "type": "High"
+        },
+        {
+          "dt": 1750377835,
+          "date": "2025-06-20T00:03+0000",
+          "height": -0.232,
+          "type": "Low"
+        },
+        {
+          "dt": 1750399267,
+          "date": "2025-06-20T06:01+0000",
+          "height": 0.923,
+          "type": "High"
+        },
+        {
+          "dt": 1750427856,
+          "date": "2025-06-20T13:57+0000",
+          "height": -0.13,
+          "type": "Low"
+        },
+        {
+          "dt": 1750444779,
+          "date": "2025-06-20T18:39+0000",
+          "height": 0.54,
+          "type": "High"
+        },
+        {
+          "dt": 1750466604,
+          "date": "2025-06-21T00:43+0000",
+          "height": -0.165,
+          "type": "Low"
+        },
+        {
+          "dt": 1750488801,
+          "date": "2025-06-21T06:53+0000",
+          "height": 1.033,
+          "type": "High"
+        }
+      ]
+    },
+    "timestamp": 1750374130379
   }
 }

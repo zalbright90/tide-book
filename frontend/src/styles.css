@@ -191,6 +191,14 @@ a:focus,
   }
 }
 
+@media (min-width: 600px) {
+    .chart-list-wrapper {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+    }
+}
+
 /* IE11 specific fixes */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   /* IE11 flexbox fixes */
@@ -221,9 +229,11 @@ a:focus,
 }
 
 body {
-  font-family: sans-serif;
-  padding: 2rem;
-  background: #e3f2fd;
+  display: flex;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 1rem;
+  background-color: #e6f3ff;
 }
 
 main {
@@ -231,7 +241,7 @@ main {
   margin: auto;
 }
 
-h1 { font-size: 2rem; }
+h1 { font-size: 2rem; text-align: center; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.25rem; }
 
@@ -256,4 +266,31 @@ pre {
   padding: 1rem;
   margin-top: 2rem;
   white-space: pre-wrap;
+}
+
+#tide-display {
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #f0f8ff;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.chart-wrapper {
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+}
+
+.chart-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.tide-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
