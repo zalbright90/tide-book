@@ -39,7 +39,12 @@ form.addEventListener('submit', async (e) => {
         const { lat, lng } = geoData.results[0].geometry;
 
         const tideRes = await fetch(`http://localhost:3000/api/tides?lat=${lat}&lon=${lng}&date=${date}`);
+
         const tideData = await tideRes.json();
+
+        const astroRes = await fetch(`http://localhost:3000/api/astronomy?location=${encodeURIComponent(location)}&date=${date}`);
+        const astroData = await astroRes.json();
+        console.log('Astronomy data:', astroData);
 
         output.textContent = '';
         tideContainer.innerHTML = '';

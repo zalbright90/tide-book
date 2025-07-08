@@ -1,0 +1,66 @@
+{
+  "46.1377048_-122.934462_2025-07-10": {
+    "data": {
+      "status": 200,
+      "callCount": 1,
+      "copyright": "Tidal data retrieved from www.worldtides.info. Copyright (c) 2014-2025 Brainware LLC. Licensed for use of individual spatial coordinates on behalf of/by an end-user. Source data created by the Center for Operational Oceanographic Products and Services (CO-OPS) and is not subject to copyright protection. NO GUARANTEES ARE MADE ABOUT THE CORRECTNESS OF THIS DATA. You may not use it if anyone or anything could come to harm as a result of using it (e.g. for navigational purposes).",
+      "requestLat": 46.1377048,
+      "requestLon": -122.934462,
+      "responseLat": 46.1061,
+      "responseLon": -122.954,
+      "atlas": "NOAA",
+      "station": "Longview, Columbia River, Washington",
+      "extremes": [
+        {
+          "dt": 1752142267,
+          "date": "2025-07-10T10:11+0000",
+          "height": 0.854,
+          "type": "High"
+        },
+        {
+          "dt": 1752174213,
+          "date": "2025-07-10T19:03+0000",
+          "height": -0.587,
+          "type": "Low"
+        },
+        {
+          "dt": 1752191847,
+          "date": "2025-07-10T23:57+0000",
+          "height": 0.469,
+          "type": "High"
+        },
+        {
+          "dt": 1752213748,
+          "date": "2025-07-11T06:02+0000",
+          "height": -0.11,
+          "type": "Low"
+        },
+        {
+          "dt": 1752231248,
+          "date": "2025-07-11T10:54+0000",
+          "height": 0.9,
+          "type": "High"
+        },
+        {
+          "dt": 1752262784,
+          "date": "2025-07-11T19:39+0000",
+          "height": -0.581,
+          "type": "Low"
+        },
+        {
+          "dt": 1752280214,
+          "date": "2025-07-12T00:30+0000",
+          "height": 0.507,
+          "type": "High"
+        },
+        {
+          "dt": 1752303205,
+          "date": "2025-07-12T06:53+0000",
+          "height": -0.144,
+          "type": "Low"
+        }
+      ]
+    },
+    "timestamp": 1751965517921
+  }
+}
