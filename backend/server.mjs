@@ -51,4 +51,44 @@ app.get('/api/tides', async (req, res) => {
     }
 });
 
+app.get('/api/astronomy', async (req, res) => {
+    const { location, date } = req.query;
+
+    if (!location || !date) {
+        return res.status(400).json({ error: 'Missing location or date' });
+    }
+
+    try {
+        const geoUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(location)}&key=${process.env.OPENCAGE_API_KEY}`;
+        const geoRes = await fetch(geoUrl);
+        const geoData = geoRes.json();
+
+        if(!geoData.results || geoData.results.length === 0) {
+            return res.status(404).json({ error: `Geographical coordinates not found`});
+        }
+
+        const astroUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${date}?unitGroup=us&key=${process.env.VISUAL_CROSSING_API_KEY}&include=days&elements=datetime,moonphase,sunrise,sunset,moonrise,moonset`;
+        const astroRes = await fetch(astroUrl);
+        const astroData = await astroRes.json();
+
+        const dayData = astroData.days && astroData.days[0];
+        if (!dayData) {
+            return res.status(500).json({ error: `Astronomy data not available` });
+        }
+
+        const astronomy = {
+            sunrise: dayData.sunrise,
+            sunset: dayData.sunset,
+            moonrise: dayData.moonrise,
+            moonset: dayData.moonset,
+            moonphase: dayData.moonphase,
+        };
+
+        res.json({ lat, lon: lng, date, astronomy });
+    } catch (error) {
+        console.error('Error fetching astronomy data:', error);
+        res.status(500).json({ error: 'Failed to fetch astronomy data'});
+    }
+});
+
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));

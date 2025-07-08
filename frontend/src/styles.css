@@ -9,7 +9,6 @@
   margin: 0;
 }
 
-/* Root configuration for smooth animations and typography */
 :root {
   line-height: 1.5;
   font-synthesis: none;
@@ -34,7 +33,6 @@ mark {
   color: #000;
 }
 
-/* Body setup for mobile-first design */
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -42,7 +40,6 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Typography - readability with fallback support */
 h1, h2, h3, h4, h5, h6 {
   font-size: inherit;
   font-weight: inherit;
@@ -54,14 +51,13 @@ h1, h2, h3, h4, h5, h6 {
 p {
   overflow-wrap: break-word;
   word-wrap: break-word; /* IE/Edge fallback */
-  max-width: 65ch; /* Optimal reading width */
+  max-width: 65ch; 
 }
 
-/* Lists - clean slate approach */
 ol, ul {
   margin: 0;
-  padding-left: 0; /* Cross-browser compatibility */
-  padding-inline-start: 0; /* Modern browsers */
+  padding-left: 0;
+  padding-inline-start: 0; 
 }
 
 ol[role="list"], 
@@ -69,30 +65,26 @@ ul[role="list"] {
   list-style: none;
 }
 
-/* Media elements - responsive and accessible */
 img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
-/* Ensure videos don't overflow on mobile */
 video {
   width: 100%;
   height: auto;
 }
 
-/* Form elements - inherit typography for consistency */
 input, button, textarea, select {
   font: inherit;
   color: inherit;
   background: transparent;
   border: none;
   padding: 0;
-  outline: none; /* Will be overridden by focus styles */
+  outline: none;
 }
 
-/* Button reset for mobile touch targets */
 button {
   cursor: pointer;
   min-height: 44px; /* iOS minimum touch target */
@@ -102,31 +94,26 @@ button {
   appearance: none;
 }
 
-/* Textarea specific improvements */
 textarea {
   resize: vertical;
   overflow: auto; /* IE fix */
 }
 
-/* Table reset for data display */
 table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
 }
 
-/* Figure and media containers */
 figure {
   margin: 0;
 }
 
-/* App container isolation */
 #root, #__next, #app {
   isolation: isolate;
   min-height: 100vh;
 }
 
-/* Focus management for accessibility - with fallbacks */
 button:focus,
 input:focus,
 textarea:focus, 
@@ -155,14 +142,12 @@ a:focus,
   }
 }
 
-/* Smooth scrolling with reduced motion respect */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 }
 
-/* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -174,14 +159,12 @@ a:focus,
   }
 }
 
-/* Mobile-specific improvements */
 @media (max-width: 768px) {
   /* Prevent zoom on input focus */
   input, textarea, select {
     font-size: 16px;
   }
   
-  /* Better touch targets */
   button, 
   [role="button"],
   input[type="submit"],
@@ -192,11 +175,11 @@ a:focus,
 }
 
 @media (min-width: 600px) {
-    .chart-list-wrapper {
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: center;
-    }
+  .chart-list-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+  }
 }
 
 /* IE11 specific fixes */
@@ -213,7 +196,6 @@ a:focus,
   }
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
   :focus-visible {
     outline: 3px solid;
@@ -221,7 +203,6 @@ a:focus,
   }
 }
 
-/* Dark mode preparations */
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
@@ -230,7 +211,7 @@ a:focus,
 
 body {
   display: flex;
-  justify-content: center;
+  align-items: flex-start;
   font-family: 'Segoe UI', sans-serif;
   padding: 1rem;
   background-color: #e6f3ff;
@@ -241,9 +222,22 @@ main {
   margin: auto;
 }
 
-h1 { font-size: 2rem; text-align: center; }
+h1 { 
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.25rem; }
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    background-color: white;
+}
 
 input, button {
   display: block;
@@ -251,6 +245,8 @@ input, button {
   padding: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
+  border: black solid 1px;
+  border-radius: 16px;
 }
 
 button {
@@ -267,6 +263,13 @@ pre {
   margin-top: 2rem;
   white-space: pre-wrap;
 }
+.chart-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
 
 #tide-display {
     padding: 1rem;
@@ -280,17 +283,20 @@ pre {
   width: 100%;
   max-width: 400px;
   height: 300px;
+  border-bottom: cadetblue solid 1px;
 }
 
-.chart-list-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
 .tide-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  border-top: black solid 1px;
+  border-bottom: black solid 1px;
+}
+
+.tide-list li {
+    align-items: flex-end;
+    border-bottom: black solid 1px;
+    border-top: black solid 1px;
+    padding: 0.25rem;
 }

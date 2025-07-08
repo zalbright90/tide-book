@@ -68,8 +68,15 @@ form.addEventListener('submit', async (e) => {
         title.style.color = '#003366';
         tideContainer.appendChild(title);
 
-        const labels = tideData.extremes.map(e => new Date(e.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-        const heights = tideData.extremes.map(e => e.height);
+        const heightsInFeet = tideData.extremes.map(e => +(e.height * 3.28084).toFixed(2));
+
+        const labels = tideData.extremes.map(e => {
+            const d = new Date(e.date);
+            const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const date = d.toLocaleDateString([], { month: '2-digit', day: '2-digit' });
+            return `${time} [${date}]`;
+        });
+        const heights = heightsInFeet;
 
         const chartListWrapper = document.createElement('div');
         chartListWrapper.classList.add('chart-list-wrapper');
@@ -85,12 +92,12 @@ form.addEventListener('submit', async (e) => {
             data: {
                 labels,
                 datasets: [{
-                    label: 'Tide Height (m)',
+                    label: 'Tide Height (ft)',
                     data: heights,
                     borderColor: '#006699',
                     backgroundColor: 'rgba(0,102,153,0.1)',
                     tension: 0.4,
-                    pointRadius: 5,
+                    pointRadius: 3,
                     pointBackgroundColor: '#006699',
                 }]
             },
@@ -105,7 +112,7 @@ form.addEventListener('submit', async (e) => {
                         },
                         title: {
                             display: true,
-                            text: 'Height (m)',
+                            text: 'Height (ft)',
                             color: '#003366'
                         }
                     },
@@ -126,7 +133,7 @@ form.addEventListener('submit', async (e) => {
                     },
                     tooltip: {
                         callbacks: {
-                            label: (ctx) => `${ctx.raw.toFixed(2)} meters`
+                            label: (ctx) => `${ctx.raw.toFixed(2)} feet`
                         }
                     }
                 }
@@ -139,8 +146,7 @@ form.addEventListener('submit', async (e) => {
         tideData.extremes.forEach(extreme => {
             const item = document.createElement('li');
             const time = new Date(extreme.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            item.textContent = `${extreme.type} Tide: ${time} — ${extreme.height}m`;
-            item.style.padding = '0.25rem 0';
+            item.textContent = `${extreme.type} Tide: ${time} | ${(extreme.height * 3.28084).toFixed(2)} ft`;
             tideList.appendChild(item);
         });
 
