@@ -61,6 +61,71 @@
         }
       ]
     },
-    "timestamp": 1751965517921
+    "timestamp": 1752111023894
+  },
+  "46.2739907_-122.904918_2025-07-20": {
+    "data": {
+      "status": 400,
+      "error": "No location found"
+    },
+    "timestamp": 1753007237297
+  },
+  "46.1377048_-122.934462_2025-07-20": {
+    "data": {
+      "status": 200,
+      "callCount": 1,
+      "copyright": "Tidal data retrieved from www.worldtides.info. Copyright (c) 2014-2025 Brainware LLC. Licensed for use of individual spatial coordinates on behalf of/by an end-user. Source data created by the Center for Operational Oceanographic Products and Services (CO-OPS) and is not subject to copyright protection. NO GUARANTEES ARE MADE ABOUT THE CORRECTNESS OF THIS DATA. You may not use it if anyone or anything could come to harm as a result of using it (e.g. for navigational purposes).",
+      "requestLat": 46.1377048,
+      "requestLon": -122.934462,
+      "responseLat": 46.1061,
+      "responseLon": -122.954,
+      "atlas": "NOAA",
+      "station": "Longview, Columbia River, Washington",
+      "extremes": [
+        {
+          "dt": 1753024357,
+          "date": "2025-07-20T15:12+0000",
+          "height": -0.665,
+          "type": "Low"
+        },
+        {
+          "dt": 1753040563,
+          "date": "2025-07-20T19:42+0000",
+          "height": 0.061,
+          "type": "High"
+        },
+        {
+          "dt": 1753059179,
+          "date": "2025-07-21T00:52+0000",
+          "height": -0.421,
+          "type": "Low"
+        },
+        {
+          "dt": 1753082067,
+          "date": "2025-07-21T07:14+0000",
+          "height": 0.677,
+          "type": "High"
+        },
+        {
+          "dt": 1753114531,
+          "date": "2025-07-21T16:15+0000",
+          "height": -0.754,
+          "type": "Low"
+        },
+        {
+          "dt": 1753130872,
+          "date": "2025-07-21T20:47+0000",
+          "height": 0.134,
+          "type": "High"
+        },
+        {
+          "dt": 1753150024,
+          "date": "2025-07-22T02:07+0000",
+          "height": -0.338,
+          "type": "Low"
+        }
+      ]
+    },
+    "timestamp": 1753007255304
   }
 }

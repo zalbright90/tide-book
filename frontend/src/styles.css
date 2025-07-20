@@ -263,6 +263,7 @@ pre {
   margin-top: 2rem;
   white-space: pre-wrap;
 }
+
 .chart-list-wrapper {
     display: flex;
     flex-direction: column;
@@ -299,4 +300,18 @@ pre {
     border-bottom: black solid 1px;
     border-top: black solid 1px;
     padding: 0.25rem;
+}
+
+.astro-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #eef6ff;
+    border: 1px solid #cce0f5;
+    border-radius: 0.75rem;
+    font-family: 'Georgia', serif;
+    color: #003366;
+}
+
+.astro-box p {
+    margin: 0.25rem 0;
 }

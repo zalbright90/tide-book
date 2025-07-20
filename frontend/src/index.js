@@ -5,6 +5,17 @@ const form = document.querySelector('#searchForm');
 const pre = document.querySelector('pre');
 const output = document.querySelector('#output');
 
+function getMoonPhaseName(moonphase) {
+    if (moonphase === 0) return 'new-moon';
+    if (moonphase > 0 && moonphase < 0.25) return 'waxing-crescent';
+    if (moonphase === 0.25) return 'first-quarter';
+    if (moonphase > 0.25 && moonphase < 0.5) return 'waxing-gibbous';
+    if (moonphase === 0.5) return 'full-moon';
+    if (moonphase > 0.5 && moonphase < 0.75) return 'waning-gibbous';
+    if (moonphase === 0.75) return 'last-quarter';
+    return 'waning-crescent';
+}
+
 let tideContainer = document.querySelector('#tide-display');
 
 if (!tideContainer) {
@@ -43,6 +54,7 @@ form.addEventListener('submit', async (e) => {
         const tideData = await tideRes.json();
 
         const astroRes = await fetch(`http://localhost:3000/api/astronomy?location=${encodeURIComponent(location)}&date=${date}`);
+
         const astroData = await astroRes.json();
         console.log('Astronomy data:', astroData);
 
@@ -67,11 +79,39 @@ form.addEventListener('submit', async (e) => {
         const dateLabel = formatDateLabel(date);
 
         const title = document.createElement('h2');
-        title.textContent = `${locationName} Tide Chart for ${dateLabel}`;
+        title.textContent = `${locationName} tide chart beginning ${dateLabel}`;
         title.style.textAlign = 'center';
         title.style.fontFamily = 'serif';
         title.style.color = '#003366';
         tideContainer.appendChild(title);
+
+        const { moonphase, sunrise, sunset, moonrise, moonset } = astroData.astronomy;
+
+        const moonPhaseName = getMoonPhaseName(moonphase);
+        const moonIcon = document.createElement('img');
+        moonIcon.src = `/icons/moon/${moonPhaseName}.svg`;
+        moonIcon.alt = `Moon phase: ${moonPhaseName.replace('-', ' ')}`;
+        moonIcon.title = moonIcon.alt;
+        moonIcon.style.width = '48px';
+        moonIcon.style.height = '48px';
+        moonIcon.style.marginRight = '10px';
+
+        const astronomyInfo = document.createElement('div');
+        astronomyInfo.style.display = 'flex';
+        astronomyInfo.style.alignItems = 'center';
+        astronomyInfo.style.margin = '1rem 0';
+        astronomyInfo.innerHTML = `
+            <div>
+                <strong>Sunrise:</strong> ${sunrise}<br>
+                <strong>Sunset:</strong> ${sunset}<br>
+                <strong>Moonrise:</strong> ${moonrise}<br>
+                <strong>Moonset:</strong> ${moonset}<br>
+                <strong>Moon Phase:</strong> ${moonPhaseName.replace('-', ' ')}
+            </div>
+        `;
+
+        astronomyInfo.appendChild(moonIcon);
+        tideContainer.appendChild(astronomyInfo);
 
         const heightsInFeet = tideData.extremes.map(e => +(e.height * 3.28084).toFixed(2));
 
