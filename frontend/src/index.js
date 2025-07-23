@@ -89,7 +89,7 @@ form.addEventListener('submit', async (e) => {
 
         const moonPhaseName = getMoonPhaseName(moonphase);
         const moonIcon = document.createElement('img');
-        moonIcon.src = `/icons/moon/${moonPhaseName}.svg`;
+        moonIcon.src = `icons/moon/${moonPhaseName}.svg`;
         moonIcon.alt = `Moon phase: ${moonPhaseName.replace('-', ' ')}`;
         moonIcon.title = moonIcon.alt;
         moonIcon.style.width = '48px';
@@ -112,6 +112,40 @@ form.addEventListener('submit', async (e) => {
 
         astronomyInfo.appendChild(moonIcon);
         tideContainer.appendChild(astronomyInfo);
+
+        function describeTides(tides) {
+            const tidePeriods = [];
+
+            for (let i = 0; i < tides.length - 1; i++) {
+                const current = tides[i];
+                const next = tides[i + 1];
+
+                const startTime = new Date(current.time);
+                const endTime = new Date(next.time);
+
+                const dateOptions = { month: 'long', day: 'numeric' };
+                const timeOptions = { hour: 'numeric', minute: '2-digit' };
+
+                const dateStr = startTime.toLocaleDateString(undefined, dateOptions);
+                const startStr = startTime.toLocaleTimeString(undefined, timeOptions);
+                const endStr = endTime.toLocaleTimeString(undefined, timeOptions);
+
+                if (current.type === 'low' && next.type === 'high') {
+                    tidePeriods.push(`Incoming tide is from ${startStr} to ${endStr} on ${dateStr}.`);
+                } else if (current.type === 'high' && next.type === 'low') {
+                    tidePeriods.push(`Outgoing tide is from ${startStr} to ${endStr} on ${dateStr}.`);
+                }
+            }
+        }
+
+        const readableTideText = describeTides(tideData.extremes);
+
+        const easyRead = document.createElement('div');
+        easyRead.innerHTML = `<h4> Tide Summary</h3><p>${readableTideText}</p>`;
+        easyRead.style.marginTop = '1rem';
+        tideContainer.appendChild(easyRead);
+
+
 
         const heightsInFeet = tideData.extremes.map(e => +(e.height * 3.28084).toFixed(2));
 
