@@ -24,7 +24,7 @@ This project aims to replace bulky paper tide books with a modern, shareable, an
 - Backend: Node.js, Express.js
 - Tide Data API: WorldTides API (with caching)
 - Geocoding API: OpenCage Geocoder
-- Hosting: Frontend on GitHub Pages, Backend on Render.com
+- Astronomy Data: Visual Crossing API
 
 ---
 
