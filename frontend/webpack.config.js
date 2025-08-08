@@ -11,7 +11,10 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     devServer: {
-        static: './dist',
+        static: [
+            './dist',
+            './public',
+        ],
         port: 8080,
         proxy: [
             {

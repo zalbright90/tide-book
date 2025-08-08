@@ -16,6 +16,17 @@ function getMoonPhaseName(moonphase) {
     return 'waning-crescent';
 }
 
+const moonPhaseTips = {
+    'new-moon': 'Dark nights, fish starting to feed more confidently; good for shallow-water fishing.',
+    'waxing-crescent': 'Activity rising; baitfish move more, predators follow.',
+    'first-quarter': 'Mid-level feeding boost; fish more active during afternoons.',
+    'waxing-gibbous': 'fish prep for peak feeding.',
+    'full-moon': 'Bright nights mean more night feeding; slower daytime bite.',
+    'waning-gibbous': 'Fish still active, but tapering off from full moon highs.',
+    'last-quarter': 'Lower energy; bite better at sunrise/sunset.',
+    'waning-crescent':'Fish conserve energy; best luck in deeper, cooler spots.'
+};
+
 let tideContainer = document.querySelector('#tide-display');
 
 if (!tideContainer) {
@@ -79,7 +90,7 @@ form.addEventListener('submit', async (e) => {
         const dateLabel = formatDateLabel(date);
 
         const title = document.createElement('h2');
-        title.textContent = `${locationName} tide chart beginning ${dateLabel}`;
+        title.textContent = `${locationName} tide chart beginning on ${dateLabel}`;
         title.style.textAlign = 'center';
         title.style.fontFamily = 'serif';
         title.style.color = '#003366';
@@ -88,8 +99,10 @@ form.addEventListener('submit', async (e) => {
         const { moonphase, sunrise, sunset, moonrise, moonset } = astroData.astronomy;
 
         const moonPhaseName = getMoonPhaseName(moonphase);
+        const tip = moonPhaseTips[moonPhaseName] || '';
+
         const moonIcon = document.createElement('img');
-        moonIcon.src = `icons/moon/${moonPhaseName}.svg`;
+        moonIcon.src = `/icons/${moonPhaseName}.svg`;
         moonIcon.alt = `Moon phase: ${moonPhaseName.replace('-', ' ')}`;
         moonIcon.title = moonIcon.alt;
         moonIcon.style.width = '48px';
@@ -106,7 +119,7 @@ form.addEventListener('submit', async (e) => {
                 <strong>Sunset:</strong> ${sunset}<br>
                 <strong>Moonrise:</strong> ${moonrise}<br>
                 <strong>Moonset:</strong> ${moonset}<br>
-                <strong>Moon Phase:</strong> ${moonPhaseName.replace('-', ' ')}
+                <strong>Moon Phase:</strong> ${moonPhaseName.replace('-', ' ')}<br><em>${tip}</em>
             </div>
         `;
 
@@ -120,8 +133,8 @@ form.addEventListener('submit', async (e) => {
                 const current = tides[i];
                 const next = tides[i + 1];
 
-                const startTime = new Date(current.time);
-                const endTime = new Date(next.time);
+                const startTime = new Date(current.date);
+                const endTime = new Date(next.date);
 
                 const dateOptions = { month: 'long', day: 'numeric' };
                 const timeOptions = { hour: 'numeric', minute: '2-digit' };
@@ -130,18 +143,27 @@ form.addEventListener('submit', async (e) => {
                 const startStr = startTime.toLocaleTimeString(undefined, timeOptions);
                 const endStr = endTime.toLocaleTimeString(undefined, timeOptions);
 
-                if (current.type === 'low' && next.type === 'high') {
-                    tidePeriods.push(`Incoming tide is from ${startStr} to ${endStr} on ${dateStr}.`);
-                } else if (current.type === 'high' && next.type === 'low') {
-                    tidePeriods.push(`Outgoing tide is from ${startStr} to ${endStr} on ${dateStr}.`);
+                const currentType = current.type.toLowerCase();
+                const nextType = next.type.toLowerCase();
+
+                if (currentType === 'low' && nextType === 'high') {
+                    tidePeriods.push(`<strong>Incoming tide</strong> is from ${startStr} to ${endStr} for ${dateStr}.<br>`);
+                } else if (currentType === 'high' && nextType === 'low') {
+                    tidePeriods.push(`<strong>Outgoing tide</strong> is from ${startStr} to ${endStr} for ${dateStr}.<br>`);
                 }
             }
+
+            return tidePeriods.join(' ');
         }
 
-        const readableTideText = describeTides(tideData.extremes);
 
+        const readableTideText = describeTides(tideData.extremes);
+        console.log(tideData.extremes);
         const easyRead = document.createElement('div');
-        easyRead.innerHTML = `<h4> Tide Summary</h3><p>${readableTideText}</p>`;
+        easyRead.innerHTML = `
+            <h2><strong>Tide Summary</strong></h2>
+            <p>${readableTideText}</p>
+        `;
         easyRead.style.marginTop = '1rem';
         tideContainer.appendChild(easyRead);
 
